@@ -3,13 +3,48 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guillaume-Docquier/quantity-types.git"
+  },
+  "module": "./dist/quantity-types.js",
+  "main": "./dist/quantity-types.cjs",
+  "types": "./dist/quantity-types.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/quantity-types.js",
+      "require": "./dist/quantity-types.cjs",
+      "types": "./dist/quantity-types.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "typecheck": "tsc",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "npm run lint -- --fix",
+    "docs": "typedoc src/index.ts --out docs",
+    "build": "npm run build:src && npm run build:types",
+    "build:src": "npm run typecheck && vite build",
+    "build:types": "dts-bundle-generator --config dts-bundle-generator.config.cjs",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "typescript": "^5.2.2",
-    "vite": "^5.1.4"
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@vitest/coverage-istanbul": "^1.2.2",
+    "dts-bundle-generator": "^9.2.4",
+    "eslint": "^8.56.0",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.4.1",
+    "typedoc": "^0.25.7",
+    "typescript": "^5.3.3",
+    "vite-tsconfig-paths": "^4.3.1",
+    "vitest": "^1.2.1"
   }
 }
