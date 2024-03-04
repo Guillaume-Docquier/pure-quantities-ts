@@ -1,20 +1,20 @@
 {
-  "name": "quantity-types",
-  "private": true,
+  "name": "pure-quantities",
+  "description": "A JavaScript library that provides fully typed quantities with unit conversion using pure functional programming.",
   "version": "0.0.0",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Guillaume-Docquier/quantity-types.git"
+    "url": "git+https://github.com/Guillaume-Docquier/pure-quantities-ts.git"
   },
-  "module": "./dist/quantity-types.js",
-  "main": "./dist/quantity-types.cjs",
-  "types": "./dist/quantity-types.d.ts",
+  "module": "./dist/pure-quantities.js",
+  "main": "./dist/pure-quantities.cjs",
+  "types": "./dist/pure-quantities.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/quantity-types.js",
-      "require": "./dist/quantity-types.cjs",
-      "types": "./dist/quantity-types.d.ts"
+      "import": "./dist/pure-quantities.js",
+      "require": "./dist/pure-quantities.cjs",
+      "types": "./dist/pure-quantities.d.ts"
     }
   },
   "files": [
