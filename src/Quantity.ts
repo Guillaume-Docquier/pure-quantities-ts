@@ -1,4 +1,4 @@
-import { Distance, type DistanceUnit } from './Distance.ts'
+import { Length, type LengthUnit } from './Length.ts'
 import { Time, type TimeUnit } from './Time.ts'
 
 export interface Quantity<TUnit extends Unit> {
@@ -6,10 +6,10 @@ export interface Quantity<TUnit extends Unit> {
   unit: TUnit
 }
 
-export type Unit = DistanceUnit | TimeUnit
+export type Unit = LengthUnit | TimeUnit
 
 const MAGNITUDES: Record<Unit, number> = {
-  ...Distance.MAGNITUDES,
+  ...Length.MAGNITUDES,
   ...Time.MAGNITUDES,
 } as const
 
