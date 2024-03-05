@@ -1,16 +1,18 @@
 import { Length, type LengthUnit } from './Length.ts'
 import { Time, type TimeUnit } from './Time.ts'
+import { Mass, type MassUnit } from './Mass.ts'
 
 export interface Quantity<TUnit extends Unit> {
   value: number
   unit: TUnit
 }
 
-export type Unit = LengthUnit | TimeUnit
+export type Unit = LengthUnit | TimeUnit | MassUnit
 
 const MAGNITUDES: Record<Unit, number> = {
   ...Length.MAGNITUDES,
   ...Time.MAGNITUDES,
+  ...Mass.MAGNITUDES,
 } as const
 
 // 1 convert function

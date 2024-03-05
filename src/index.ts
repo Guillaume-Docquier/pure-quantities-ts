@@ -1,4 +1,4 @@
 export { Quantity } from './Quantity.ts'
-export { Length, LengthUnit } from './Length.ts'
-export { Time, TimeUnit } from './Time.ts'
-export { Area, AreaUnit } from './Area.ts'
+export { type Time, TimeUnit } from './Time.ts'
+export { type Length, LengthUnit } from './Length.ts'
+export { type Mass, MassUnit } from './Mass.ts'
