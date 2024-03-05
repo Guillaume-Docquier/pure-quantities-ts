@@ -5,22 +5,11 @@ export enum DistanceUnit {
   MILLIMETERS = 'millimeters',
 }
 
-const MAGNITUDES: Record<DistanceUnit, number> = {
-  [DistanceUnit.METERS]: 1,
-  [DistanceUnit.MILLIMETERS]: 1 / 1_000,
-} as const
-
 export interface Distance extends Quantity<DistanceUnit> {}
 
 export const Distance = {
-  convert (distance: Distance, newUnit: DistanceUnit): Distance {
-    return {
-      value: Distance.in(distance, newUnit),
-      unit: newUnit,
-    }
-  },
-
-  in (distance: Distance, newUnit: DistanceUnit): number {
-    return distance.value * MAGNITUDES[distance.unit] / MAGNITUDES[newUnit]
-  },
+  MAGNITUDES: {
+    [DistanceUnit.METERS]: 1,
+    [DistanceUnit.MILLIMETERS]: 1 / 1_000,
+  } satisfies Record<DistanceUnit, number>,
 } as const
