@@ -1,27 +1,21 @@
-import { Length, type LengthUnit } from './Length.ts'
-import { Time, type TimeUnit } from './Time.ts'
-import { Mass, type MassUnit } from './Mass.ts'
+import { Length } from './Length.ts'
+import { Time } from './Time.ts'
+import { Mass } from './Mass.ts'
+import { type BaseUnit, isBaseUnit } from './BaseUnit.ts'
+import { type BaseUnitSpecification, type DerivedUnit, isDerivedUnit } from './DerivedUnit.ts'
+
+type Unit = BaseUnit | DerivedUnit
 
 export interface Quantity<TUnit extends Unit> {
   value: number
   unit: TUnit
 }
 
-export type Unit = LengthUnit | TimeUnit | MassUnit
-
-const MAGNITUDES: Record<Unit, number> = {
+const MAGNITUDES: Record<BaseUnit, number> = {
   ...Length.MAGNITUDES,
   ...Time.MAGNITUDES,
   ...Mass.MAGNITUDES,
 } as const
-
-// 1 convert function
-// Takes a scalar and a list of magnitudes
-// Has numerators and denominators (i.e m/s^2)
-// Scalar is always:
-// - Multiplied by numerators
-// - Divided by denominators
-// To convert, one must provide compatible units. All matching units will be converted
 
 export const Quantity = {
   convert<TUnit extends Unit>(quantity: Quantity<TUnit>, newUnit: TUnit): Quantity<TUnit> {
@@ -32,6 +26,20 @@ export const Quantity = {
   },
 
   in<TUnit extends Unit>(quantity: Quantity<TUnit>, newUnit: TUnit): number {
-    return quantity.value * MAGNITUDES[quantity.unit] / MAGNITUDES[newUnit]
+    if (isDerivedUnit(quantity.unit) && isDerivedUnit(newUnit)) {
+      return quantity.value *
+        getFactor(quantity.unit.baseUnits.length, newUnit.baseUnits.length) *
+        getFactor(quantity.unit.baseUnits.mass, newUnit.baseUnits.mass) *
+        getFactor(quantity.unit.baseUnits.time, newUnit.baseUnits.time)
+    }
+    else if (isBaseUnit(quantity.unit) && isBaseUnit(newUnit)) {
+      return quantity.value * MAGNITUDES[quantity.unit] / MAGNITUDES[newUnit]
+    }
+
+    throw new Error(`Unsupported conversion (for now) from ${JSON.stringify(quantity.unit)} to ${JSON.stringify(newUnit)}`)
   },
 } as const
+
+function getFactor<TBaseUnitSpec extends BaseUnitSpecification<BaseUnit>> (from: TBaseUnitSpec, to: TBaseUnitSpec): number {
+  return MAGNITUDES[from.unit] ** from.power / MAGNITUDES[to.unit] ** to.power
+}
