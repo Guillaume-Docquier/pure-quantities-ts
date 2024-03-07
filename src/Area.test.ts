@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { Quantity } from './Quantity.ts'
 import { createTheory } from './TestUtils.ts'
-import { LengthUnit } from './Length.ts'
+import { LengthUnit } from './base_units/Length.ts'
 import { type Area, AreaUnit } from './Area.ts'
 
 describe('Area', () => {

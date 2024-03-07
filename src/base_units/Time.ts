@@ -1,11 +1,11 @@
-import { type Quantity } from './Quantity.ts'
+import { type Quantity } from '../Quantity.ts'
+
+export type Time = Quantity<TimeUnit>
 
 export enum TimeUnit {
   SECONDS = 'seconds',
   MILLISECONDS = 'milliseconds',
 }
-
-export interface Time extends Quantity<TimeUnit> {}
 
 export const Time = {
   MAGNITUDES: {

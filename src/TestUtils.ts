@@ -1,4 +1,5 @@
-import { type BaseUnit, type Quantity } from './Quantity.ts'
+import { type Quantity } from './Quantity.ts'
+import { type BaseUnit } from './BaseUnit.ts'
 
 export type UnitTestData<TUnit extends BaseUnit> = Record<TUnit, Record<TUnit, { initial: number, converted: number }>>
 

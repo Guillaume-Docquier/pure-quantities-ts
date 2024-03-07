@@ -1,11 +1,11 @@
-import { type Quantity } from './Quantity.ts'
+import { type Quantity } from '../Quantity.ts'
+
+export type Length = Quantity<LengthUnit>
 
 export enum LengthUnit {
   METERS = 'meters',
   MILLIMETERS = 'millimeters',
 }
-
-export interface Length extends Quantity<LengthUnit> {}
 
 export const Length = {
   MAGNITUDES: {

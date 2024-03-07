@@ -1,17 +1,17 @@
 import { describe, expect, it } from 'vitest'
-import { Quantity } from './Quantity.ts'
-import { TimeUnit } from './Time.ts'
-import { createTheory } from './TestUtils.ts'
+import { Quantity } from '../Quantity.ts'
+import { LengthUnit } from './Length.ts'
+import { createTheory } from '../TestUtils.ts'
 
-describe('Time', () => {
-  const THEORY = createTheory<TimeUnit>({
-    [TimeUnit.SECONDS]: {
-      [TimeUnit.SECONDS]: { initial: 2.5, converted: 2.5 },
-      [TimeUnit.MILLISECONDS]: { initial: 2.5, converted: 2500 },
+describe('Length', () => {
+  const THEORY = createTheory<LengthUnit>({
+    [LengthUnit.METERS]: {
+      [LengthUnit.METERS]: { initial: 2.5, converted: 2.5 },
+      [LengthUnit.MILLIMETERS]: { initial: 2.5, converted: 2500 },
     },
-    [TimeUnit.MILLISECONDS]: {
-      [TimeUnit.SECONDS]: { initial: 2500, converted: 2.5 },
-      [TimeUnit.MILLISECONDS]: { initial: 2500, converted: 2500 },
+    [LengthUnit.MILLIMETERS]: {
+      [LengthUnit.METERS]: { initial: 2500, converted: 2.5 },
+      [LengthUnit.MILLIMETERS]: { initial: 2500, converted: 2500 },
     },
   })
 

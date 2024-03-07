@@ -1,12 +1,12 @@
-import { type Quantity } from './Quantity.ts'
+import { type Quantity } from '../Quantity.ts'
+
+export type Mass = Quantity<MassUnit>
 
 export enum MassUnit {
   KILOGRAM = 'kilogram',
   GRAM = 'gram',
   MILLIGRAM = 'milligram',
 }
-
-export interface Mass extends Quantity<MassUnit> {}
 
 export const Mass = {
   /**

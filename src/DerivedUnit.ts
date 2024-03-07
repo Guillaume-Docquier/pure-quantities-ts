@@ -1,7 +1,4 @@
-import type { BaseUnit, BaseUnitKind } from './BaseUnit.ts'
-import { type LengthUnit } from './Length.ts'
-import { type TimeUnit } from './Time.ts'
-import { type MassUnit } from './Mass.ts'
+import type { BaseUnit, BaseUnitKind, KindToBaseUnit } from './BaseUnit.ts'
 import { TypeGuards } from './TypeGuards.ts'
 
 export function isDerivedUnit (unit: unknown): unit is DerivedUnit {
@@ -14,13 +11,7 @@ export interface DerivedUnit {
 }
 
 export type BaseUnitsSpecification = {
-  [TBaseUnitKind in BaseUnitKind]: BaseUnitSpecification<KindToBaseUnit[TBaseUnitKind]>
-}
-
-export interface KindToBaseUnit {
-  [BaseUnitKind.Length]: LengthUnit
-  [BaseUnitKind.Time]: TimeUnit
-  [BaseUnitKind.Mass]: MassUnit
+  [TBaseUnitKind in BaseUnitKind]?: BaseUnitSpecification<KindToBaseUnit[TBaseUnitKind]>
 }
 
 export interface BaseUnitSpecification<TBaseUnit extends BaseUnit> {
